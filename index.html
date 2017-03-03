@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>jQuery - exercice 1 - partie 4</title>
+    <script src="jquery-2.2.4.js"></script>
+  </head>
+  <body>
+    <p>Choisissez entre Pierre! Feuille ! Ciseaux! ou Pastéque !</p>
+      <select form="listform" name="select">
+          <option id="rock" value="Pierre">Pierre !</option>
+          <option id="paper" value="Feuille">Feuille !</option>
+          <option id="cisors" value="Ciseaux">Ciseaux !</option>
+      </select>
+      <button type="button" name="button">Chifumi !</button>
+      <p id="victor"></p>
+      <p id="loose"></p>
+      <p id="percent"></p>
+      <script>
+      var victory = 1; // Ces deux variables représentent le nombre de victoires et d'échecs avant l'incrémentation dans la fonction
+      var looser = 1;
+        $(function() { //déclaration de la fonction qui démarre lorsque la page est pleinement chargée
+          var array = ['Pierre', 'Feuille', 'Ciseaux']; //création d'un tableau dans lequel...
+            $('button').click(function() { //lors du clique sur le boutton chifumi...
+              var x = (Math.floor(Math.random() *3)); //ira chercher aléatoirement l'un de indices. Math Floor va cherche l'entier. Math random va cherche un indice aléatoire entre 0 et 1. D'où le *3
+              var me = $('select').val(); // var me représente ce que choisit l'utilisateur (valeur du selecteur)
+            if (me == array[x]) { // si la valeur de var me est égale à la valeur aléatoir du tableau,
+                alert(array[x] + ' : vous êtes exequo'); // il affiche dans une boite de dialogue l'aléatoire de l'ordinateur et une chaine de caractères
+            }// et si = si la valeur de var est égale à Feuilles et que l'indice de l'array est Pierre, etc.
+            else if ((me == 'Feuille' && array[x] == 'Pierre') || (me == 'Pierre' && array[x] == 'Ciseaux') || (me == 'Ciseaux' && array[x] == 'Feuilles')) {
+                alert(array[x] + ' : vous avez gagné !'); //affiche le succès
+                $('#victor').text('Vous avez gagné ' + victory++ + ' fois'); // incrémentation de la variable victory à chaque victoire
+            }else { //sinon, les autres comparaison affche l'echec
+                alert(array[x] + ' : vous avez perdu !');
+                $('#loose').text('Vous avez perdu ' + looser++ + ' fois');// incrémentation de la variable loose à chaque défaite
+            }
+            $('#percent').text('Vous avez ' + victory / (victory+looser) * 100 + '% de victoires'); //pour finir, le bonus de pourcentage qui se calcul à partir des var victory et looser
+          })
+        })
+        /*else if ($('#rock').val() != array[1]) {
+            alert(array[x] + ' : Vous avez gagné');
+        }else if ($('#paper #cisors').val() != array[x + 1]) {
+            alert(array[x] + ' : Vous avez perdu');
+        }else if ($('select').val() != array[x - 1]) {
+         alert(array[x] + ' : Vous avez gagné');
+       }*/
+      </script>
+    </ul>
+  </body>
+</html>
